@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:alura_lista_tarefas_flutter/difficulty.dart';
+import 'package:alura_lista_tarefas_flutter/components/difficulty.dart';
 
 class Task extends StatefulWidget {
   final String nomeTarefa;
@@ -17,8 +17,7 @@ class _TaskState extends State<Task> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-          child: Stack(children: [
+      child: Stack(children: [
         Container(
           //color: Colors.blue,
           decoration: BoxDecoration(
@@ -54,7 +53,7 @@ class _TaskState extends State<Task> {
                     height: 100,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
-                      child: Image.network(
+                      child: Image.asset(
                         widget.foto,
                         fit: BoxFit.cover,
                       ),
@@ -64,7 +63,7 @@ class _TaskState extends State<Task> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 200,
                         child: Text(widget.nomeTarefa,
                             style: TextStyle(
@@ -77,7 +76,7 @@ class _TaskState extends State<Task> {
                       Difficulty(difficultyLevel: widget.dificuldade),
                     ],
                   ),
-                  Container(
+                  SizedBox(
                     height: 60,
                     width: 70,
                     child: ElevatedButton(
@@ -90,7 +89,7 @@ class _TaskState extends State<Task> {
                           setState(() {
                             nivel++;
                           });
-                          print(nivel);
+                          // print("Nível: $nivel");
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +113,8 @@ class _TaskState extends State<Task> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  child: SizedBox(
+                    width: 200,
                     child: LinearProgressIndicator(
                       backgroundColor: Colors.black26,
                       color: Colors.white,
@@ -122,7 +122,6 @@ class _TaskState extends State<Task> {
                           ? (nivel / widget.dificuldade) / 10
                           : 1,
                     ),
-                    width: 200,
                   ),
                 ),
                 Padding(
@@ -134,7 +133,7 @@ class _TaskState extends State<Task> {
             ),
           ],
         ),
-      ])),
+      ]),
     );
   }
 }

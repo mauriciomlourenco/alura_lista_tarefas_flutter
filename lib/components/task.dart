@@ -13,6 +13,7 @@ class Task extends StatefulWidget {
 
 class _TaskState extends State<Task> {
   int nivel = 0;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -53,10 +54,12 @@ class _TaskState extends State<Task> {
                     height: 100,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
-                      child: Image.asset(
-                        widget.foto,
-                        fit: BoxFit.cover,
-                      ),
+                      child: widget.foto.contains('http')
+                          ? Image.network(widget.foto, fit: BoxFit.cover)
+                          : Image.asset(
+                              widget.foto,
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   Column(

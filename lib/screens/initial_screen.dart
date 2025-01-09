@@ -19,10 +19,8 @@ class _InitialScreenState extends State<InitialScreen> {
         title: const Text('Tarefas', style: TextStyle(color: Colors.white)),
       ),
       body: ListView(
-        children: [
-          ...TaskInherited.of(context)!.taskList,
-          SizedBox(height: 80),
-        ],
+        padding: EdgeInsets.only(top: 8, bottom: 70),
+        children: TaskInherited.of(context)!.taskList,
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,

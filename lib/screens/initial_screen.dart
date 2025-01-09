@@ -1,5 +1,6 @@
+import 'package:alura_lista_tarefas_flutter/data/task_inherited.dart';
+import 'package:alura_lista_tarefas_flutter/screens/form_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:alura_lista_tarefas_flutter/components/task.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -9,8 +10,6 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  bool opacidade = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,19 +18,11 @@ class _InitialScreenState extends State<InitialScreen> {
         backgroundColor: Colors.blue,
         title: const Text('Tarefas', style: TextStyle(color: Colors.white)),
       ),
-      body: AnimatedOpacity(
-        opacity: opacidade ? 1.0 : 0.0,
-        duration: const Duration(milliseconds: 800),
-        child: ListView(
-          children: [
-            Task("Aprender Flutter", "assets/images/flutter.png", 3),
-            Task("Andar de Bike", "assets/images/bike.png", 2),
-            Task("Meditar", "assets/images/meditar.jpg", 5),
-            Task("Ler", "assets/images/ler.png", 4),
-            Task("Jogar", "assets/images/jogar.jpg", 1),
-            SizedBox(height: 80),
-          ],
-        ),
+      body: ListView(
+        children: [
+          ...TaskInherited.of(context)!.taskList,
+          SizedBox(height: 80),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
@@ -40,11 +31,14 @@ class _InitialScreenState extends State<InitialScreen> {
             borderRadius: BorderRadius.circular(50),
             side: BorderSide(color: Colors.blue)),
         onPressed: () {
-          setState(() {
-            opacidade = !opacidade;
-          });
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (contextNew) => FormScreen(
+                        taskContext: context,
+                      )));
         },
-        child: const Icon(Icons.remove_red_eye),
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -16,6 +16,23 @@ class _FormScreenState extends State<FormScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool difficultyValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      if (int.parse(value) > 5 || int.parse(value) < 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -46,7 +63,7 @@ class _FormScreenState extends State<FormScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        validator: (value) => value != null && value.isEmpty
+                        validator: (value) => valueValidator(value)
                             ? 'Insira o nome da tarefa.'
                             : null,
                         controller: nameController,
@@ -66,9 +83,7 @@ class _FormScreenState extends State<FormScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        validator: (value) => value!.isEmpty ||
-                                int.parse(value) > 5 ||
-                                int.parse(value) < 1
+                        validator: (value) => difficultyValidator(value)
                             ? 'Insira uma dificuldade entre 1 e 5.'
                             : null,
                         keyboardType: TextInputType.number,
@@ -89,8 +104,9 @@ class _FormScreenState extends State<FormScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        validator: (value) =>
-                            value!.isEmpty ? 'Insira um url de imagem.' : null,
+                        validator: (value) => valueValidator(value)
+                            ? 'Insira um url de imagem.'
+                            : null,
                         keyboardType: TextInputType.url,
                         onChanged: (text) {
                           setState(() {});

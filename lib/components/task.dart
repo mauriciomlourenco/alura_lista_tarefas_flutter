@@ -5,15 +5,15 @@ class Task extends StatefulWidget {
   final String nomeTarefa;
   final String foto;
   final int dificuldade;
-  const Task(this.nomeTarefa, this.foto, this.dificuldade, {super.key});
+  Task(this.nomeTarefa, this.foto, this.dificuldade, {super.key});
+
+  int nivel = 0;
 
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -90,7 +90,7 @@ class _TaskState extends State<Task> {
                                 borderRadius: BorderRadius.circular(8))),
                         onPressed: () {
                           setState(() {
-                            nivel++;
+                            widget.nivel++;
                           });
                           // print("Nível: $nivel");
                         },
@@ -122,14 +122,14 @@ class _TaskState extends State<Task> {
                       backgroundColor: Colors.black26,
                       color: Colors.white,
                       value: (widget.dificuldade > 0)
-                          ? (nivel / widget.dificuldade) / 10
+                          ? (widget.nivel / widget.dificuldade) / 10
                           : 1,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Nível: $nivel",
+                  child: Text("Nível: ${widget.nivel}",
                       style: TextStyle(color: Colors.white, fontSize: 16)),
                 ),
               ],

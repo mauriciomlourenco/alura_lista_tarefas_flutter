@@ -1,3 +1,5 @@
+import 'package:alura_lista_tarefas_flutter/components/task.dart';
+import 'package:alura_lista_tarefas_flutter/data/task_dao.dart';
 import 'package:alura_lista_tarefas_flutter/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
@@ -156,7 +158,12 @@ class _FormScreenState extends State<FormScreen> {
                           // print(nameController.text);
                           // print(int.parse(difficultyController.text));
                           // print(imageController.text);
-                          TaskInherited.of(widget.taskContext)!.newTask(
+                          TaskDao().save(Task(
+                              nameController.text,
+                              imageController.text,
+                              int.parse(difficultyController.text)));
+
+                          TaskInherited.of(widget.taskContext).newTask(
                             nameController.text,
                             imageController.text,
                             int.parse(difficultyController.text),
@@ -165,10 +172,11 @@ class _FormScreenState extends State<FormScreen> {
                               .showSnackBar(const SnackBar(
                             content: Text('Criando uma nova tarefa...'),
                           ));
-                          Navigator.pop(context);
-                        } else {
-                          print("Formulário inválido");
+                          Navigator.pop(context, true);
                         }
+                        //else {
+                        //   print("Formulário inválido");
+                        // }
                       },
                       child: const Text('Adicionar!',
                           style: TextStyle(color: Colors.white, fontSize: 14)),

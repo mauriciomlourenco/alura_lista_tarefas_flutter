@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class TaskInherited extends InheritedWidget {
   TaskInherited({
-    Key? key,
-    required Widget child,
-  }) : super(key: key, child: child);
+    super.key,
+    required super.child,
+  });
 
   final List<Task> taskList = [
     Task("Aprender Flutter", "assets/images/flutter.png", 3),

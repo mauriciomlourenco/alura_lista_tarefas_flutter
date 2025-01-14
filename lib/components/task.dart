@@ -1,3 +1,4 @@
+import 'package:alura_lista_tarefas_flutter/data/task_dao.dart';
 import 'package:flutter/material.dart';
 import 'package:alura_lista_tarefas_flutter/components/difficulty.dart';
 
@@ -88,6 +89,9 @@ class _TaskState extends State<Task> {
                             textStyle: TextStyle(color: Colors.white),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8))),
+                        onLongPress: () => {
+                              TaskDao().delete(widget.nomeTarefa),
+                            },
                         onPressed: () {
                           setState(() {
                             widget.nivel++;
